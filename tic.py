@@ -40,12 +40,12 @@ def win_check(board,shape):
     else :
         return False
 
-def first_player():
+def first_player(Player1, Player2):
     rand = random.randint (1, 2)
     if rand == 1:
-        return 'Player1 turn'
+        return Player1
     else:
-        return 'Player2 turn'
+        return Player2
 
 def space_check(board, position):
     return board[position] ==' '
@@ -58,7 +58,7 @@ def full_board_check(board):
 
 def player_choice(board):
     position = ' '
-    while position not in '1 2 3 4 5 6 7 8 9'.split() or not space_check(board, int(position)):
+    while position not in '9 8 7 6 5 4 3 2 1'.split() or not space_check(board, int(position)):
         choice = input('Enter position')
         return int (choice)
 
@@ -73,7 +73,10 @@ while True:
     # Reset the board
     theBoard = [' '] * 10
     player1_marker, player2_marker = player_input()
-    turn = first_player()
+
+    name1 = input('Enter name of Player 1')
+    name2 = input('Enter name of Player 2')
+    turn = first_player(name1, name2)
     print(turn + ' will go first.')
     game_on = True
 
@@ -87,7 +90,7 @@ while True:
 
             if win_check(theBoard, player1_marker):
                 display_board(theBoard)
-                print('Congratulations! You have won the game!')
+                print(name1+'has won')
                 game_on = False
             else:
                 if full_board_check(theBoard):
@@ -106,7 +109,7 @@ while True:
 
             if win_check(theBoard, player2_marker):
                 display_board(theBoard)
-                print('Player 2 has won!')
+                print(name2+'has won!')
                 game_on = False
             else:
                 if full_board_check(theBoard):
